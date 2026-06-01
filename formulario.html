@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael Lima | Fotografia & Contato</title>
+    <style>
+        /* Configurações Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #141110;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Menu de Navegação Superior */
+        header {
+            background-color: #000000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- LOGO COM FOTO AO LADO DO NOME --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Espaço entre a foto e o texto */
+        }
+
+        .logo-img {
+            width: 90px; /* Altura ideal e discreta para o menu */
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%; /* Deixa a foto redonda como no modelo */
+            border: 1px solid #333;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #bfa15f;
+        }
+
+        /* Hamburger Mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: #ffffff;
+        }
+
+        /* --- SEÇÃO DO FORMULÁRIO DE CONTATO --- */
+        #contato-section {
+            padding: 120px 20px 60px 20px;
+            max-width: 600px; /* Alinhamento centralizado estreito igual ao print */
+            margin: 0 auto;
+        }
+
+        .form-title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #faa303; /* Linha azul embaixo do título do print */
+            padding-bottom: 10px;
+        }
+
+        .form-title-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .form-title {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #f6e6c2;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        /* Inputs no tom creme pastel fiel às imagens */
+        .input-creme {
+            width: 100%;
+            padding: 14px;
+            background-color: #fdf3cd;
+            border: none;
+            border-radius: 8px;
+            color: #000000;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Estilização dos Checkboxes customizados */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #e5a93b;
+            cursor: pointer;
+        }
+
+        /* Botão estilizado para Upload de Referências */
+        .upload-container {
+            position: relative;
+            width: 120px;
+            height: 100px;
+            background-color: #8c8279;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            gap: 8px;
+            color: #000000;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .upload-container input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Botão Laranja de Envio */
+        .btn-enviar {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 40px auto 0 auto;
+            background-color: #e28856;
+            color: #000000;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-enviar:hover {
+            background-color: #c97143;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background-color: #000000;
+                width: 100%;
+                text-align: center;
+                padding: 30px 0;
+                transition: 0.3s ease;
+                border-bottom: 1px solid #222;
+            }
+            .nav-menu.active { left: 0; }
+            .nav-menu li { margin: 15px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="img/logo.png" alt="Rafael Lima" class="logo-img">
+                <span class="logo-text">RAFAEL LIMA</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Portfólio</a></li>
+                <li><a href="#contato-section">Contato</a></li>
+            </ul>
+            <button class="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <section id="contato-section">
+        <form id="formularioContato">
+            
+            <div class="form-title-container">
+                <img src="img/logo.png" alt="Icone">
+                <div class="form-title">Formulário de Contato</div>
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" class="input-creme" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" class="input-creme" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp</label>
+                <input type="tel" id="whatsapp" class="input-creme" placeholder="(00) 00000-0000" required>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" class="input-creme" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" class="input-creme" required>
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de serviço</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="servico" value="Casamento"> Casamento</label>
+                    <label class="checkbox-item"><input type="checkbox" name="servico" value="Evento"> Evento</label>
+                    <label class="checkbox-item"><input type="checkbox" name="servico" value="Ensaio de fotos"> Ensaio de fotos</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="data-evento">Data do evento</label>
+                <input type="date" id="data-evento" class="input-creme">
+            </div>
+
+            <div class="form-group">
+                <label for="local-evento">Espaço do evento (opcional)</label>
+                <input type="text" id="local-evento" class="input-creme">
+            </div>
+
+            <div class="form-group">
+                <label>Quantidade de pessoas</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="quantidade" value="Individual"> Individual</label>
+                    <label class="checkbox-item"><input type="checkbox" name="quantidade" value="Casal"> Casal</label>
+                    <label class="checkbox-item"><input type="checkbox" name="quantidade" value="Grupo"> Grupo</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="detalhes">Conte um pouco sobre o que você deseja para o ensaio:</label>
+                <textarea id="detalhes" class="input-creme" style="height: 120px; resize: none;"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Upload de referências (opcional)</label>
+                <div class="upload-container">
+                    <span class="upload-icon">📥</span>
+                    <span>Upload</span>
+                    <input type="file" id="referencias" accept="image/*" multiple>
+                </div>
+                <span id="file-name-feedback" style="display:block; margin-top:10px; font-size:0.85rem; color:#bfa15f;"></span>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar</button>
+        </form>
+    </section>
+
+    <script>
+        // Controle de abertura do menu mobile (Hamburguer)
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Feedback visual de arquivos selecionados no input file
+        const fileInput = document.getElementById('referencias');
+        const fileFeedback = document.getElementById('file-name-feedback');
+        fileInput.addEventListener('change', function() {
+            const quantidadeArquivos = this.files.length;
+            if (quantidadeArquivos > 0) {
+                fileFeedback.textContent = `${quantidadeArquivos} arquivo(s) selecionado(s).`;
+            } else {
+                fileFeedback.textContent = '';
+            }
+        });
+
+        // Captura e validação das informações enviadas pelo formulário
+        document.getElementById('formularioContato').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o recarregamento padrão da página
+
+            // Captura de valores de texto simples
+            const dadosFormulario = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                estado: document.getElementById('estado').value,
+                cidade: document.getElementById('cidade').value,
+                dataEvento: document.getElementById('data-evento').value,
+                localEvento: document.getElementById('local-evento').value,
+                detalhes: document.getElementById('detalhes').value,
+                servicosSelecionados: [],
+                quantidadePessoas: []
+            };
+
+            // Filtrando os Checkboxes marcados para Tipo de Serviço
+            const checkboxesServico = document.querySelectorAll('input[name="servico"]:checked');
+            checkboxesServico.forEach(item => dadosFormulario.servicosSelecionados.push(item.value));
+
+            // Filtrando os Checkboxes marcados para Quantidade de Pessoas
+            const checkboxesQuantidade = document.querySelectorAll('input[name="quantidade"]:checked');
+            checkboxesQuantidade.forEach(item => dadosFormulario.quantidadePessoas.push(item.value));
+
+            // Exemplo de manipulação dos dados com JavaScript (Envio ou logs estruturados)
+            console.log("Dados prontos para o envio:", dadosFormulario);
+            
+            alert(`Obrigado pelo contato, ${dadosFormulario.nome}! Suas informações foram enviadas.`);
+            this.reset();
+            fileFeedback.textContent = '';
+        });
+    </script>
+</body>
+</html>

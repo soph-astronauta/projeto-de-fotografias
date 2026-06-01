@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depoimentos | Rafael Lima</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            letter-spacing: 3px;
+            color: #e5a93b;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Formulário de Envio */
+        .form-depoimento {
+            background-color: #121212;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            margin-bottom: 40px;
+        }
+
+        .form-depoimento h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #bfa15f;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 4px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #e5a93b;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .btn-submit {
+            background-color: #e5a93b;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #bfa15f;
+        }
+
+        /* Lista de Depoimentos */
+        .depoimento-card {
+            background-color: #121212;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .depoimento-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .autor-nome {
+            font-weight: bold;
+            color: #bfa15f;
+            font-size: 1.1rem;
+        }
+
+        .depoimento-texto {
+            line-height: 1.6;
+            color: #dddddd;
+            margin-bottom: 15px;
+        }
+
+        .depoimento-img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Ações (Curtir / Comentar) */
+        .depoimento-acoes {
+            display: flex;
+            gap: 20px;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 10px 0;
+            margin-bottom: 15px;
+        }
+
+        .btn-acao {
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .btn-acao:hover {
+            color: #e5a93b;
+        }
+
+        .btn-acao.curtido {
+            color: #e5a93b;
+            font-weight: bold;
+        }
+
+        /* Seção de Comentários */
+        .comentarios-container {
+            padding-left: 15px;
+            border-left: 2px solid #222;
+        }
+
+        .comentario-item {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #cccccc;
+        }
+
+        .comentario-item strong {
+            color: #bfa15f;
+        }
+
+        .form-comentario {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form-comentario input {
+            padding: 8px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Depoimentos e Feedback</h1>
+
+        <div class="form-depoimento">
+            <h2>Deixe seu depoimento</h2>
+            <form id="formNovoDepoimento">
+                <div class="input-group">
+                    <input type="text" id="inputNome" placeholder="Seu Nome" required>
+                </div>
+                <div class="input-group">
+                    <textarea id="inputTexto" placeholder="Conte como foi sua experiência..." required></textarea>
+                </div>
+                <div class="input-group">
+                    <label style="display:block; margin-bottom: 5px; color: #aaa; font-size: 0.9rem;">Adicionar Foto (Opcional):</label>
+                    <input type="file" id="inputFoto" accept="image/*">
+                </div>
+                <button type="submit" class="btn-submit">Publicar</button>
+            </form>
+        </div>
+
+        <div id="listaDepoimentos"></div>
+    </div>
+
+    <script>
+        // Depoimentos prontos (Fictícios) que aparecem caso o usuário não tenha nada salvo ainda
+        const depoimentosIniciais = [
+            {
+                id: 1,
+                nome: "Mariana & Carlos Silva",
+                texto: "O Rafael foi simplesmente impecável no nosso casamento! Desde a reunião inicial até a entrega das fotos, fomos muito bem atendidos. Ele conseguiu capturar olhares e risadas espontâneas que nem percebemos no dia. Olhar o álbum é reviver cada segundo. Obrigada pelo profissionalismo!",
+                foto: "img/casamento1.jpg", // Substitua pelos caminhos das suas fotos reais
+                curtidas: 24,
+                curtidoPeloUsuario: false,
+                comentarios: [
+                    { autor: "Ana Paula", texto: "Fotos maravilhosas! Trabalho incrível." },
+                    { autor: "Rafael Lima", texto: "Muito obrigado, Mariana e Carlos! Foi uma honra fazer parte desse momento único." }
+                ]
+            },
+            {
+                id: 2,
+                nome: "Roberto Mendes (Diretor TechInova)",
+                texto: "Contratamos o Rafael para a cobertura da nossa convenção corporativa anual. Além de fotos nítidas e enquadramentos perfeitos, destaco a discrição dele durante as palestras e a agilidade na entrega do material para nossa equipe de marketing. Altamente recomendado para empresas.",
+                foto: "img/evento1.jpg",
+                curtidas: 12,
+                curtidoPeloUsuario: false,
+                comentarios: []
+            },
+            {
+                id: 3,
+                nome: "Beatriz Vasconcellos",
+                texto: "Fiz um ensaio individual externo com o Rafael e estava super tímida no começo, mas ele me deixou totalmente à vontade. As fotos ficaram leves, naturais e superaram todas as minhas expectativas. Ele tem uma sensibilidade surreal com luz natural!",
+                foto: "img/ensaio1.jpg",
+                curtidas: 37,
+                curtidoPeloUsuario: false,
+                comentarios: [
+                    { autor: "Juliana Costa", texto: "Ficou linda demais, Bia! Quero fazer um assim também." }
+                ]
+            }
+        ];
+
+        // Carrega do localStorage, se estiver vazio, usa os depoimentos iniciais acima
+        let depoimentos = JSON.parse(localStorage.getItem('depoimentos'));
+        if (!depoimentos || depoimentos.length === 0) {
+            depoimentos = depoimentosIniciais;
+            localStorage.setItem('depoimentos', JSON.stringify(depoimentos));
+        }
+
+        const form = document.getElementById('formNovoDepoimento');
+        const listaContainer = document.getElementById('listaDepoimentos');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('inputNome').value;
+            const texto = document.getElementById('inputTexto').value;
+            const fotoFile = document.getElementById('inputFoto').files[0];
+
+            if (fotoFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    salvarDepoimento(nome, texto, event.target.result);
+                };
+                reader.readAsDataURL(fotoFile);
+            } else {
+                salvarDepoimento(nome, texto, null);
+            }
+        });
+
+        function salvarDepoimento(nome, texto, fotoBase64) {
+            const novoDepoimento = {
+                id: Date.now(),
+                nome: nome,
+                texto: texto,
+                foto: fotoBase64,
+                curtidas: 0,
+                curtidoPeloUsuario: false,
+                comentarios: []
+            };
+
+            depoimentos.unshift(novoDepoimento);
+            atualizarLocalStorage();
+            renderizarDepoimentos();
+            form.reset();
+        }
+
+        function renderizarDepoimentos() {
+            listaContainer.innerHTML = '';
+
+            depoimentos.forEach(dep => {
+                const card = document.createElement('div');
+                card.className = 'depoimento-card';
+
+                let imagemHtml = dep.foto ? `<img src="${dep.foto}" class="depoimento-img" alt="Foto de ${dep.nome}">` : '';
+
+                let comentariosHtml = dep.comentarios.map(c => `
+                    <div class="comentario-item">
+                        <strong>${c.autor}:</strong> ${c.texto}
+                    </div>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="depoimento-header">
+                        <span class="autor-nome">${dep.nome}</span>
+                    </div>
+                    <p class="depoimento-texto">${dep.texto}</p>
+                    ${imagemHtml}
+                    
+                    <div class="depoimento-acoes">
+                        <button class="btn-acao ${dep.curtidoPeloUsuario ? 'curtido' : ''}" onclick="alternarCurtida(${dep.id})">
+                            ❤ <span id="curtidas-qtd-${dep.id}">${dep.curtidas}</span> Curtidas
+                        </button>
+                    </div>
+
+                    <div class="comentarios-container">
+                        <div id="comentarios-lista-${dep.id}">
+                            ${comentariosHtml}
+                        </div>
+                        <form class="form-comentario" onsubmit="adicionarComentario(event, ${dep.id})">
+                            <input type="text" placeholder="Seu nome" required style="width: 30%;">
+                            <input type="text" placeholder="Escreva um comentário..." required style="width: 70%;">
+                            <button type="submit" class="btn-submit" style="padding: 5px 15px; font-size: 0.8rem;">Enviar</button>
+                        </form>
+                    </div>
+                `;
+
+                listaContainer.appendChild(card);
+            });
+        }
+
+        window.alternarCurtida = function(id) {
+            const dep = depoimentos.find(d => d.id === id);
+            if (dep) {
+                if (dep.curtidoPeloUsuario) {
+                    dep.curtidas--;
+                    dep.curtidoPeloUsuario = false;
+                } else {
+                    dep.curtidas++;
+                    dep.curtidoPeloUsuario = true;
+                }
+                atualizarLocalStorage();
+                renderizarDepoimentos();
+            }
+        };
+
+        window.adicionarComentario = function(e, id) {
+            e.preventDefault();
+            const formComentario = e.target;
+            const autor = formComentario.elements[0].value;
+            const texto = formComentario.elements[1].value;
+
+            const dep = depoimentos.find(d => d.id === id);
+            if (dep) {
+                dep.comentarios.push({ autor, texto });
+                atualizarLocalStorage();
+                renderizarDepoimentos();
+            }
+        };
+
+        function atualizarLocalStorage() {
+            localStorage.setItem('depoimentos', JSON.stringify(depoimentos));
+        }
+
+        renderizarDepoimentos();
+    </script>
+</body>
+</html>
