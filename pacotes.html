@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pacotes | Rafael Lima Fotografia</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --gold:#c9a86a;
+    --dark:#0a0a0a;
+    --card:#161616;
+    --card-hover:#1d1d1d;
+    --text:#f5f5f5;
+    --gray:#b8b8b8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(
+    180deg,
+    #050505,
+    #0d0d0d,
+    #050505);
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+.hero span{
+    color:var(--gold);
+}
+
+.hero p{
+    color:#999;
+    max-width:700px;
+    margin:auto;
+}
+
+/* SEÇÕES */
+
+.section{
+    max-width:1400px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:2.2rem;
+    color:var(--gold);
+    letter-spacing:2px;
+}
+
+/* GRID */
+
+.packages{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+
+.card{
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    transition:.4s;
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:var(--gold);
+
+    box-shadow:
+    0 20px 40px rgba(201,168,106,.15);
+}
+
+.card h3{
+    text-align:center;
+    color:var(--gold);
+    margin-bottom:20px;
+}
+
+.card p{
+    color:#ddd;
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.card ul{
+    list-style:none;
+}
+
+.card li{
+    color:#bbb;
+    margin-bottom:8px;
+}
+
+.card li::before{
+    content:"• ";
+    color:var(--gold);
+}
+
+.price{
+
+    margin-top:20px;
+
+    font-size:1.4rem;
+
+    font-weight:700;
+
+    color:white;
+}
+
+/* BOTÃO */
+
+.btn{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    padding:14px;
+
+    background:var(--gold);
+
+    color:#000;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.btn:hover{
+
+    background:white;
+
+    transform:scale(1.03);
+}
+
+/* RODAPÉ */
+
+.footer{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    border-top:1px solid #222;
+
+    margin-top:50px;
+}
+
+.footer p{
+    color:#666;
+}
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    .section-title h2{
+        font-size:1.7rem;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+    <h1>PACOTES DE <span>FOTOGRAFIA</span></h1>
+
+    <p>
+        Escolha o pacote ideal para registrar seus momentos
+        com qualidade, emoção e profissionalismo.
+    </p>
+
+</section>
+
+<!-- ENSAIOS -->
+
+<section class="section">
+
+    <div class="section-title">
+        <h2>ENSAIOS FOTOGRÁFICOS</h2>
+    </div>
+
+    <div class="packages">
+
+        <div class="card">
+
+            <h3>ESSENCIAL</h3>
+
+            <p>Uma experiência leve e natural para registrar momentos especiais.</p>
+
+            <ul>
+                <li>1 hora de ensaio</li>
+                <li>1 locação</li>
+                <li>25 fotos editadas</li>
+                <li>Direção durante o ensaio</li>
+                <li>Galeria online</li>
+            </ul>
+
+            <div class="price">A partir de R$ 450</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+        <div class="card">
+
+            <h3>LIFESTYLE</h3>
+
+            <p>Mais tempo e liberdade criativa para fotos únicas.</p>
+
+            <ul>
+                <li>2 horas de ensaio</li>
+                <li>Até 2 locações</li>
+                <li>Três looks</li>
+                <li>50 fotos editadas</li>
+                <li>Vídeos curtos para redes sociais</li>
+                <li>Galeria premium</li>
+            </ul>
+
+            <div class="price">A partir de R$ 850</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+        <div class="card">
+
+            <h3>PREMIUM</h3>
+
+            <p>Experiência completa com estética cinematográfica.</p>
+
+            <ul>
+                <li>Até 4 horas</li>
+                <li>Locações ilimitadas</li>
+                <li>100 fotos editadas</li>
+                <li>Consultoria de estilo</li>
+                <li>Drone opcional</li>
+                <li>Making of</li>
+            </ul>
+
+            <div class="price">A partir de R$ 1.600</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CASAMENTOS -->
+
+<section class="section">
+
+    <div class="section-title">
+        <h2>CASAMENTOS</h2>
+    </div>
+
+    <div class="packages">
+
+        <div class="card">
+
+            <h3>INTIMATE WEDDING</h3>
+
+            <ul>
+                <li>Cobertura até 4 horas</li>
+                <li>Fotografia</li>
+                <li>Cerimônia e recepção</li>
+                <li>150 fotos editadas</li>
+            </ul>
+
+            <div class="price">A partir de R$ 2.500</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+        <div class="card">
+
+            <h3>CLASSIC WEDDING</h3>
+
+            <ul>
+                <li>Making of dos noivos</li>
+                <li>Cerimônia</li>
+                <li>Recepção completa</li>
+                <li>400 fotos editadas</li>
+                <li>Álbum digital</li>
+            </ul>
+
+            <div class="price">A partir de R$ 5.500</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+        <div class="card">
+
+            <h3>WEDDING EXPERIENCE</h3>
+
+            <ul>
+                <li>Cobertura de 12 horas</li>
+                <li>Pré-wedding incluso</li>
+                <li>Drone</li>
+                <li>Álbum premium</li>
+                <li>Entrega expressa</li>
+            </ul>
+
+            <div class="price">A partir de R$ 9.500</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- EVENTOS -->
+
+<section class="section">
+
+    <div class="section-title">
+        <h2>EVENTOS</h2>
+    </div>
+
+    <div class="packages">
+
+        <div class="card">
+
+            <h3>EVENTO SOCIAL</h3>
+
+            <ul>
+                <li>Até 3 horas</li>
+                <li>100 fotos editadas</li>
+                <li>Galeria online</li>
+                <li>Entrega em até 7 dias</li>
+            </ul>
+
+            <div class="price">A partir de R$ 950</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+        <div class="card">
+
+            <h3>EVENTO PREMIUM</h3>
+
+            <ul>
+                <li>Até 6 horas</li>
+                <li>2 fotógrafos</li>
+                <li>200 fotos editadas</li>
+                <li>Galeria personalizada</li>
+            </ul>
+
+            <div class="price">A partir de R$ 2.200</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+        <div class="card">
+
+            <h3>EVENTO EXPERIENCE</h3>
+
+            <ul>
+                <li>Até 10 horas</li>
+                <li>2 fotógrafos</li>
+                <li>Drone opcional</li>
+                <li>400+ fotos editadas</li>
+                <li>Conteúdo vertical para redes sociais</li>
+            </ul>
+
+            <div class="price">A partir de R$ 4.500</div>
+
+            <a href="agendamentos.html" class="btn">AGENDAR</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <h3>RAFAEL LIMA FOTOGRAFIA</h3>
+
+    <p>Transformando momentos em memórias eternas.</p>
+
+</footer>
+
+</body>
+</html>
+```

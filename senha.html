@@ -1,209 +1,315 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área do Cliente | Galeria Protegida</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área do Cliente | Rafael Lima</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+<style>
 
-        /* Tela de Login (Proteção) */
-        #login-screen {
-            background-color: #1e1e1e;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-        #login-screen h2 {
-            margin-bottom: 10px;
-            color: #d4af37; /* Tom dourado elegante */
-        }
+body{
+    background:#121212;
+    color:#fff;
+    min-height:100vh;
+}
 
-        #login-screen p {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
+/* LOGIN */
 
-        #login-screen input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #333;
-            border-radius: 4px;
-            background-color: #2a2a2a;
-            color: #fff;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
+#login-screen{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
 
-        #login-screen button {
-            width: 100%;
-            padding: 12px;
-            background-color: #d4af37;
-            border: none;
-            border-radius: 4px;
-            color: #121212;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+.login-box{
+    background:#1e1e1e;
+    padding:40px;
+    border-radius:15px;
+    width:100%;
+    max-width:400px;
+    text-align:center;
+}
 
-        #login-screen button:hover {
-            background-color: #f1c40f;
-        }
+.login-box h2{
+    color:#d4af37;
+    margin-bottom:10px;
+}
 
-        #error-message {
-            color: #e74c3c;
-            margin-top: 10px;
-            font-size: 14px;
-            display: none;
-        }
+.login-box p{
+    color:#aaa;
+    margin-bottom:20px;
+}
 
-        /* Galeria Oculta (Apenas aparece após a senha) */
-        #gallery-screen {
-            display: none; /* Escondido por padrão */
-            max-width: 1200px;
-            width: 90%;
-            padding: 40px 0;
-            text-align: center;
-        }
+.login-box input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2a2a2a;
+    color:white;
+    margin-bottom:15px;
+}
 
-        #gallery-screen h1 {
-            color: #d4af37;
-            margin-bottom: 30px;
-        }
+.login-box button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#d4af37;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .grid-galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+#error-message{
+    margin-top:10px;
+    color:#ff5b5b;
+    display:none;
+}
 
-        .foto-card {
-            background-color: #1e1e1e;
-            padding: 10px;
-            border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            position: relative;
-        }
+/* GALERIA */
 
-        /* Placeholder simulando as fotos do fotógrafo */
-        .foto-placeholder {
-            width: 100%;
-            height: 200px;
-            background-color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #777;
-            font-weight: bold;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+#gallery-screen{
+    display:none;
+    padding:40px 20px;
+}
 
-        .foto-card p {
-            margin: 10px 0 0 0;
-            font-size: 14px;
-            color: #bbb;
-        }
+#gallery-screen h1{
+    text-align:center;
+    color:#d4af37;
+    margin-bottom:10px;
+}
 
-        /* Bloqueio de clique direito simulado para proteção */
-        .foto-placeholder {
-            user-select: none;
-        }
-    </style>
+.subtitulo{
+    text-align:center;
+    color:#aaa;
+    margin-bottom:40px;
+}
+
+.grid-galeria{
+    max-width:1400px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+}
+
+.foto-card{
+    background:#1e1e1e;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.foto-card:hover{
+    transform:translateY(-5px);
+}
+
+.foto-preview{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    display:block;
+}
+
+.info{
+    padding:15px;
+}
+
+.info p{
+    margin-bottom:15px;
+    color:#ccc;
+}
+
+.btn-download{
+    display:block;
+    text-align:center;
+    padding:12px;
+    background:#d4af37;
+    color:#000;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.btn-download:hover{
+    background:#e7c55c;
+}
+
+</style>
 </head>
+
 <body>
 
-    <div id="login-screen">
-        <h2>Área do Cliente</h2>
-        <p>Insira a senha fornecida pelo fotógrafo para visualizar o seu ensaio.</p>
-        <input type="password" id="password-input" placeholder="Digite a senha aqui...">
-        <button onclick="verificarSenha()">Acessar Galeria</button>
-        <p id="error-message">Senha incorreta. Tente novamente.</p>
+<!-- LOGIN -->
+
+<div id="login-screen">
+
+    <div class="login-box">
+
+        <h2>Galeria Privada</h2>
+
+        <p>Digite a senha para acessar suas fotos.</p>
+
+        <input
+            type="password"
+            id="password-input"
+            placeholder="Digite sua senha">
+
+        <button onclick="verificarSenha()">
+            Entrar
+        </button>
+
+        <div id="error-message">
+            Senha incorreta.
+        </div>
+
     </div>
 
-    <div id="gallery-screen">
-        <h1>Ensaio Pré-Wedding | Mariana & Rafael</h1>
-        <p style="color: #aaa; margin-bottom: 40px;">Clique nas fotos para selecionar ou fazer o download.</p>
-        
-        <div class="grid-galeria">
-            <div class="foto-card">
-                <div class="foto-placeholder">Foto_001.JPG</div>
-                <p>Ensaio_Mari_Rafa_01.jpg</p>
-            </div>
-            <div class="foto-card">
-                <div class="foto-placeholder">Foto_002.JPG</div>
-                <p>Ensaio_Mari_Rafa_02.jpg</p>
-            </div>
-            <div class="foto-card">
-                <div class="foto-placeholder"><img src="" alt=""></div>
-                <p>Ensaio_Mari_Rafa_03.jpg</p>
-            </div>
-            <div class="foto-card">
-                <div class="foto-placeholder">Foto_004.JPG</div>
-                <p>Ensaio_Mari_Rafa_04.jpg</p>
-            </div>
-            <div class="foto-card">
-                <div class="foto-placeholder">Foto_005.JPG</div>
-                <p>Ensaio_Mari_Rafa_05.jpg</p>
-            </div>
-            <div class="foto-card">
-                <div class="foto-placeholder">Foto_006.JPG</div>
-                <p>Ensaio_Mari_Rafa_06.jpg</p>
+</div>
+
+<!-- GALERIA -->
+
+<div id="gallery-screen">
+
+    <h1>Ensaio Pré-Wedding</h1>
+
+    <p class="subtitulo">
+        Rogério & Rafaela
+    </p>
+
+    <div class="grid-galeria">
+
+        <!-- FOTO 1 -->
+        <div class="foto-card">
+            <a href="img/Ensaio_rogerio_rafa_01.jpg" download>
+                <img src="img/Ensaio_rogerio_rafa_01.jpg" class="foto-preview">
+            </a>
+
+            <div class="info">
+                <p>Ensaio_rogerio_rafa_01.jpg</p>
+
+                <a href="img/Ensaio_rogerio_rafa_01.jpg"
+                   download
+                   class="btn-download">
+
+                   ⬇ Baixar Foto
+
+                </a>
             </div>
         </div>
+
+        <!-- FOTO 2 -->
+        <div class="foto-card">
+            <a href="img/Ensaio_rogerio_rafa_02.jpg" download>
+                <img src="img/Ensaio_rogerio_rafa_02.jpg" class="foto-preview">
+            </a>
+
+            <div class="info">
+                <p>Ensaio_rogerio_rafa_02.jpg</p>
+
+                <a href="img/Ensaio_rogerio_rafa_02.jpg"
+                   download
+                   class="btn-download">
+
+                   ⬇ Baixar Foto
+
+                </a>
+            </div>
+        </div>
+
+        <!-- FOTO 3 -->
+        <div class="foto-card">
+            <a href="img/Ensaio_rogerio_rafa_03.jpg" download>
+                <img src="img/Ensaio_rogerio_rafa_03.jpg" class="foto-preview">
+            </a>
+
+            <div class="info">
+                <p>Ensaio_rogerio_rafa_03.jpg</p>
+
+                <a href="img/Ensaio_rogerio_rafa_03.jpg"
+                   download
+                   class="btn-download">
+
+                   ⬇ Baixar Foto
+
+                </a>
+            </div>
+        </div>
+
+        <!-- FOTO 4 -->
+        <div class="foto-card">
+            <a href="img/Ensaio_rogerio_rafa_04.jpg" download>
+                <img src="img/Ensaio_rogerio_rafa_04.jpg" class="foto-preview">
+            </a>
+
+            <div class="info">
+                <p>Ensaio_rogerio_rafa_04.jpg</p>
+
+                <a href="img/Ensaio_rogerio_rafa_04.jpg"
+                   download
+                   class="btn-download">
+
+                   ⬇ Baixar Foto
+
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <script>
-        function verificarSenha() {
-            const senhaCorreta = "marirafa76"; // Defina a senha aqui
-            const senhaDigitada = document.getElementById("password-input").value;
-            const loginScreen = document.getElementById("login-screen");
-            const galleryScreen = document.getElementById("gallery-screen");
-            const errorMessage = document.getElementById("error-message");
+</div>
 
-            if (senhaDigitada === senhaCorreta) {
-                // Se a senha estiver certa, esconde o login e mostra a galeria
-                loginScreen.style.display = "none";
-                galleryScreen.style.display = "block";
-                // Muda o alinhamento do body para o topo da página
-                document.body.style.alignItems = "flex-start";
-            } else {
-                // Se estiver errada, mostra mensagem de erro
-                errorMessage.style.display = "block";
-                document.getElementById("password-input").value = ""; // Limpa o campo
-            }
-        }
+<script>
 
-        // Permite apertar "Enter" no teclado para entrar
-        document.getElementById("password-input").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") {
-                verificarSenha();
-            }
-        });
-    </script>
+function verificarSenha(){
+
+    const senhaCorreta = "marirafa76";
+
+    const senha =
+    document.getElementById("password-input").value;
+
+    if(senha === senhaCorreta){
+
+        document.getElementById("login-screen")
+        .style.display = "none";
+
+        document.getElementById("gallery-screen")
+        .style.display = "block";
+
+    }else{
+
+        document.getElementById("error-message")
+        .style.display = "block";
+
+    }
+}
+
+document
+.getElementById("password-input")
+.addEventListener("keypress",function(e){
+
+    if(e.key === "Enter"){
+        verificarSenha();
+    }
+
+});
+
+</script>
+
 </body>
 </html>
-
-
-
-
+```
