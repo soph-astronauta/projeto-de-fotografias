@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu | Rafael Lima</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#000;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* CABEÇALHO */
+
+.header{
+    text-align:center;
+    padding:60px 20px 40px;
+}
+
+.header h1{
+    font-size:3rem;
+    font-weight:300;
+    letter-spacing:10px;
+}
+
+.header p{
+    color:#bfa15f;
+    letter-spacing:5px;
+    margin-top:10px;
+}
+
+/* TABELA MENU */
+
+.menu-grid{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.menu-card{
+    height:250px;
+
+    text-decoration:none;
+    color:white;
+
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:1.5rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+
+    background:linear-gradient(
+        135deg,
+        #111,
+        #1c1c1c
+    );
+
+    transition:.4s;
+}
+
+.menu-card:hover{
+    transform:translateY(-8px);
+    border-color:#bfa15f;
+    box-shadow:0 20px 40px rgba(191,161,95,.2);
+    color:#bfa15f;
+}
+
+/* RODAPÉ */
+
+.footer{
+    text-align:center;
+    padding:50px 20px;
+    color:#777;
+}
+
+@media(max-width:768px){
+
+    .header h1{
+        font-size:2rem;
+        letter-spacing:5px;
+    }
+
+    .menu-card{
+        height:180px;
+        font-size:1.2rem;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+
+    <h1>RAFAEL LIMA</h1>
+
+    <p>FOTÓGRAFO</p>
+
+</div>
+
+<div class="menu-grid">
+
+    <a href="agendamentos.html" class="menu-card">
+        Agendamentos
+    </a>
+
+    <a href="depoimentos.html" class="menu-card">
+        Depoimentos
+    </a>
+
+    <a href="redes_sociais.html" class="menu-card">
+        Redes Sociais
+    </a>
+
+    <a href="senha.html" class="menu-card">
+        Galeria
+    </a>
+
+
+
+</div>
+
+<div class="footer">
+
+    © Rafael Lima Fotografia
+
+</div>
+
+</body>
+</html>

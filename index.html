@@ -1,458 +1,710 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafael Lima | Fotografia</title>
-    <style>
-        /* Configurações Gerais */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            background-color: #000000;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+<title>Rafael Lima | Fotografia</title>
 
-        /* Menu de Navegação Superior (Preto Semitransparente para a Home) */
-        header {
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px); /* Efeito de vidro borrado nas fotos de fundo */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid #111;
-        }
+<style>
+:root{
+    --gold:#bfa15f;
+    --black:#000;
+    --white:#fff;
+    --dark:#111;
+    --gray:#ccc;
+}
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior:smooth;
+}
 
-        .logo {
-            font-weight: 300;
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-        }
+body{
+    background:var(--black);
+    color:var(--white);
+    overflow-x:hidden;
+}
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-            align-items: center;
-        }
+/* ==========================
+   HEADER
+========================== */
 
-        .nav-menu a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 300;
-            transition: color 0.3s ease;
-        }
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid #222;
+}
 
-        .nav-menu a:hover {
-            color: #bfa15f;
-        }
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        /* Menu Sanduíche (Mobile) */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
 
-        .hamburger .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            transition: all 0.3s ease-in-out;
-            background-color: #ffffff;
-        }
+.logo{
+    font-size:1.2rem;
+    letter-spacing:4px;
+    font-weight:300;
+}
 
-        /* Estilos das Seções e Animação de Scroll */
-        section {
-            padding: 100px 20px 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
+.nav-menu{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    list-style:none;
+}
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.nav-menu a{
+    color:var(--white);
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:.85rem;
+    letter-spacing:2px;
+    transition:.3s;
+}
 
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
-            color: #e5a93b;
-        }
+.nav-menu a:hover{
+    color:var(--gold);
+}
 
-        /* --- NOVO ESTILO: Home com Imagem de Fundo Inteira --- */
-        #home {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            max-width: 100%;
-            /* Substitua pelo caminho correto da imagem enviada no seu projeto */
-            background: url('rafael-lima-home.png') no-repeat center center;
-            background-size: cover;
-            padding: 0 10%;
-            opacity: 1;
-            transform: none;
-        }
+/* ==========================
+   MENU HAMBÚRGUER
+========================== */
 
-        /* Máscara linear para garantir leitura perfeita do texto no mobile se a foto cortar */
-        #home::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 95%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%);
-            z-index: 1;
-        }
+.hamburger{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    z-index:1100;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.bar{
+    display:block;
+    width:25px;
+    height:3px;
+    margin:5px 0;
+    background:var(--white);
+    transition:.3s;
+}
 
-        .home-content {
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
-            animation: fadeInUp 1.2s ease-out forwards;
-        }
+.hamburger.active .bar:nth-child(1){
+    transform:translateY(8px) rotate(45deg);
+}
 
-        .home-content h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 8px;
-            margin-bottom: 5px;
-            color: #ffffff;
-            line-height: 1.1;
-        }
+.hamburger.active .bar:nth-child(2){
+    opacity:0;
+}
 
-        .home-content span {
-            display: block;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            color: #bfa15f;
-            margin-bottom: 25px;
-            font-weight: 400;
-        }
+.hamburger.active .bar:nth-child(3){
+    transform:translateY(-8px) rotate(-45deg);
+}
 
-        .home-content p {
-            font-size: 1.1rem;
-            color: #cccccc;
-            line-height: 1.8;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
+/* ==========================
+   SEÇÕES
+========================== */
 
-        /* Galeria Estilo Pinterest (Masonry) */
-        .gallery-grid {
-            column-count: 3;
-            column-gap: 20px;
-            width: 100%;
-        }
+section{
+    padding:100px 20px 70px;
+    max-width:1200px;
+    margin:auto;
 
-        .gallery-item {
-            width: 100%;
-            margin-bottom: 20px;
-            break-inside: avoid;
-            overflow: hidden;
-            background-color: #111;
-            border-radius: 4px;
-        }
+    opacity:0;
+    transform:translateY(40px);
+    transition:.8s;
+}
 
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
+section.visible{
+    opacity:1;
+    transform:translateY(0);
+}
 
-        .gallery-item img:hover {
-            transform: scale(1.04);
-        }
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+    color:#e5a93b;
+    font-size:1.8rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
 
-        /* Layout Especial: Sobre */
-        #sobre {
-            background-color: #9c8c63;
-            color: #1a1a1a;
-            max-width: 100%;
-            padding: 100px 10% 80px 10%;
-        }
+/* ==========================
+   HOME
+========================== */
 
-        .sobre-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
+#home{
+    max-width:100%;
+    min-height:100vh;
 
-        .sobre-img {
-            flex: 1;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
 
-        .sobre-img img {
-            width: 100%;
-            display: block;
-        }
+    padding:0 10%;
 
-        .sobre-text {
-            flex: 1;
-        }
+    background:url("rafael-lima-home.png") center center/cover no-repeat;
 
-        .sobre-text h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            line-height: 1.2;
-        }
+    position:relative;
 
-        .sobre-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            text-align: justify;
-        }
+    opacity:1;
+    transform:none;
+}
 
-        /* Responsividade (Telas de Celular e Tablet) */
-        @media (max-width: 900px) {
-            .gallery-grid {
-                column-count: 2;
-            }
-        }
+#home::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(0,0,0,.75),
+        rgba(0,0,0,.25),
+        rgba(0,0,0,.75)
+    );
+}
 
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
+.home-content{
+    width:100%;
+    height: 100%;
+}
 
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
+.home-content img{
+    width:100%;
+    height:100vh;
+    object-fit:cover;
+    display:block;
+}
 
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
+.hero-action{
+    position:absolute;
 
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
+    left:28%;
+    top:72%;
 
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                gap: 0;
-                flex-direction: column;
-                background-color: #000000;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s ease;
-                border-bottom: 1px solid #222;
-            }
+    transform:translate(-50%, -50%);
 
-            .nav-item {
-                margin: 16px 0;
-            }
+    text-align:center;
+}
 
-            .nav-menu.active {
-                left: 0;
-            }
+.btn-cont{
+    position:absolute;
 
-            #home {
-                padding: 0 20px;
-                justify-content: center;
-                text-align: center;
-                background-position: 65% center; /* Ajusta o enquadramento do rosto do Rafael no mobile */
-            }
+    /* ajuste fino da posição */
+    left:150px;
+    top:290px;
 
-            .home-content h1 {
-                font-size: 2.5rem;
-                letter-spacing: 4px;
-            }
+    padding:14px 35px;
 
-            .home-content span {
-                font-size: 0.9rem;
-                letter-spacing: 4px;
-            }
+    border:1px solid #bfa15f;
+    color:#fff;
+    text-decoration:none;
 
-            .sobre-container {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-        }
+    font-size:.9rem;
+    letter-spacing:3px;
 
-        @media (max-width: 480px) {
-            .gallery-grid {
-                column-count: 1;
-            }
-        }
-    </style>
+    background:transparent;
+
+    transition:.3s;
+}
+
+.btn-cont:hover{
+    background:#bfa15f;
+    color:#000;
+}
+/* ==========================
+   SOBRE
+========================== */
+
+#sobre{
+    max-width:100%;
+    background:#9c8c63;
+    color:#1a1a1a;
+    padding:100px 10%;
+}
+
+.sobre-container{
+    max-width:1100px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    gap:50px;
+}
+
+.sobre-img,
+.sobre-text{
+    flex:1;
+}
+
+.sobre-img img{
+    width:100%;
+    display:block;
+}
+
+.sobre-text h2{
+    font-size:2rem;
+    margin-bottom:20px;
+    line-height:1.2;
+    letter-spacing:2px;
+}
+
+.sobre-text p{
+    line-height:1.8;
+    font-size:1.1rem;
+    text-align:justify;
+}
+
+/* ==========================
+   GALERIAS
+========================== */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    border-radius:8px;
+    background:#111;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.05);
+}
+
+.footer{
+    background:#050505;
+    border-top:1px solid #222;
+    margin-top:80px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+}
+
+.footer-brand h2{
+    font-size:1.8rem;
+    font-weight:300;
+    letter-spacing:5px;
+    margin-bottom:15px;
+}
+
+.footer-brand p{
+    color:#999;
+    max-width:450px;
+    line-height:1.8;
+}
+
+.footer-social{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.footer-social a{
+    color:#fff;
+    text-decoration:none;
+    letter-spacing:2px;
+    transition:.3s;
+    position:relative;
+}
+
+.footer-social a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:1px;
+    background:#bfa15f;
+    transition:.3s;
+}
+
+.footer-social a:hover{
+    color:#bfa15f;
+}
+
+.footer-social a:hover::after{
+    width:100%;
+}
+
+.footer-bottom{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #111;
+    color:#666;
+    font-size:.9rem;
+}
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media(max-width:768px){
+
+    .hamburger{
+        display:block;
+    }
+
+    .nav-menu{
+        position:fixed;
+        top:70px;
+        right:-100%;
+        width:280px;
+        height:calc(100vh - 70px);
+
+        background:#000;
+
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-start;
+
+        padding-top:40px;
+        gap:30px;
+
+        transition:.4s ease;
+        border-left:1px solid #222;
+    }
+
+    .nav-menu.active{
+        right:0;
+    }
+
+    #home{
+        justify-content:center;
+        text-align:center;
+        padding:0 20px;
+        background-position:65% center;
+    }
+
+    .home-content img{
+        max-width:320px;
+        margin:auto;
+    }
+
+    .sobre-container{
+        flex-direction:column;
+        gap:30px;
+    }
+
+    .sobre-text{
+        text-align:center;
+    }
+
+    .sobre-text p{
+        text-align:left;
+    }
+}
+
+@media(max-width:480px){
+
+    .logo{
+        font-size:1rem;
+        letter-spacing:2px;
+    }
+
+    .section-title{
+        font-size:1.4rem;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">RAFAEL LIMA</div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home">Início</a></li>
-                <li class="nav-item"><a href="#sobre">Sobre</a></li>
-                <li class="nav-item"><a href="#casamentos">Casamentos</a></li>
-                <li class="nav-item"><a href="#eventos">Eventos</a></li>
-                <li class="nav-item"><a href="#ensaios">Ensaios</a></li>
-            </ul>
+<header>
+    <nav class="navbar">
+
+        <div class="nav-left">
+
+            <div class="logo">
+                RAFAEL LIMA
+            </div>
+
             <button class="hamburger" aria-label="Abrir Menu">
+
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
+
             </button>
-        </nav>
-    </header>
 
-    <section id="home">
-        <div class="home-content">
-             <img src="img/rafael lima.png" alt="Rafael Lima com câmera fotográfica">
         </div>
-    </section>
 
-    <section id="sobre">
-        <div class="sobre-container">
-            <div class="sobre-img">
-<<<<<<< HEAD
-                <img src="img/sobre (2).png" alt="Rafael Lima com câmera fotográfica">
-=======
-                <img src="" alt="Rafael Lima com câmera fotográfica">
->>>>>>> dd3c16b39f402720ff0829c86f1229537f19dcbe
-            </div>
-            <div class="sobre-text">
-                <h2>SOBRE<br>RAFAEL LIMA</h2>
-                <p>Fotógrafo autônomo especializado em retratos, eventos e fotografia lifestyle, com foco em capturar momentos autênticos e cheios de emoção. Meu trabalho une criatividade, sensibilidade e atenção aos detalhes para transformar histórias em imagens únicas.</p>
-            </div>
+        <ul class="nav-menu">
+
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#casamentos">Casamentos</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#ensaios">Ensaios</a></li>
+
+            <li>
+            <a href="mais.html" class="menu-btn">
+           Mais
+        </a>
+    </li>
+
+        </ul>
+
+    </nav>
+</header>
+
+<!-- HOME -->
+
+<section id="home">
+
+    <div class="home-content">
+
+        <img
+            src="img/rafael lima.png"
+            alt="Rafael Lima Fotógrafo">
+
+    </div>
+
+</section>
+
+<!-- SOBRE -->
+
+<section id="sobre">
+
+    <div class="sobre-container">
+
+        <div class="sobre-img">
+
+            <img
+                src="img/sobre (2).png"
+                alt="Rafael Lima">
+
         </div>
-    </section>
+        <section id="btn-cont">
 
-    <section id="casamentos">
-        <h2 class="section-title">Casamentos</h2>
-        <div class="gallery-grid">
-<<<<<<< HEAD
-            <div class="gallery-item"><img src="img/casamento1.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento2.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento3.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento4.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento5.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento6.jpg" alt=""></div>
-            <div class="gallery-item"><img src="img/casamento7.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento8.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento9.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casamento10.jpg" alt="Casamento"></div>
-=======
-            <div class="gallery-item"><img src="img/fotogrande.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/fotodebaixo2.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/casalfeliz.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/fotocanto2.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/fotodebaixo.jpg" alt="Casamento"></div>
-            <div class="gallery-item"><img src="img/fotocanto2.jpg" alt="Casamento"></div>
-        
-            <div class="gallery-item featured-wide"><img src="img/casamento.jpg" alt="Toque de mãos noivos"></div>
->>>>>>> dd3c16b39f402720ff0829c86f1229537f19dcbe
+            <img src="img/rafael-lima.png" alt="Rafael Lima">
+
+        <a href="formulario.html" class="btn-cont">
+        ENTRE EM CONTATO
+    </a>
+
+</section>
+
+        <div class="sobre-text">
+
+            <h2>
+                SOBRE<br>
+                RAFAEL LIMA
+            </h2>
+
+            <p>
+                Fotógrafo autônomo especializado em retratos,
+                eventos e fotografia lifestyle, com foco em
+                capturar momentos autênticos e cheios de emoção.
+                Meu trabalho une criatividade, sensibilidade e
+                atenção aos detalhes para transformar histórias
+                em imagens únicas.
+            </p>
+            
+
         </div>
-    </section>
 
-    <section id="eventos">
-        <h2 class="section-title">Eventos</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="img/evento1.jpg" alt="Festa e show"></div>
-            <div class="gallery-item"><img src="img/evento2.jpg" alt="Pessoas celebrando"></div>
-            <div class="gallery-item"><img src="img/evento3.jpg" alt="Palestra ou platéia"></div>
-            <div class="gallery-item"><img src="img/evento4.jpg" alt="Conferência corporativa"></div>
-            <div class="gallery-item"><img src="img/evento5.jpg" alt="Interação em eventos"></div>
-            <div class="gallery-item"><img src="img/evento6.jpg" alt="Vista aérea do evento"></div>
-            <div class="gallery-item"><img src="img/evento7.jpg" alt="Pessoas sorrindo em evento"></div>
+    </div>
+
+</section>
+
+<!-- CASAMENTOS -->
+
+<section id="casamentos">
+
+    <h2 class="section-title">Casamentos</h2>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item"><img src="img/casamento1.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento2.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento3.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento4.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento5.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento6.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento7.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento8.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento9.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/casamento10.jpg" alt=""></div>
+
+    </div>
+
+</section>
+
+<!-- EVENTOS -->
+
+<section id="eventos">
+
+    <h2 class="section-title">Eventos</h2>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item"><img src="img/evento1.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/evento2.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/evento3.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/evento4.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/evento5.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/evento6.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/evento7.jpg" alt=""></div>
+
+    </div>
+
+</section>
+
+<!-- ENSAIOS -->
+
+<section id="ensaios">
+
+    <h2 class="section-title">Ensaios Fotográficos</h2>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item"><img src="img/ensaio1.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/ensaio2.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/ensaio3.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/ensaio4.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/ensaio6.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/ensaio7.jpg" alt=""></div>
+        <div class="gallery-item"><img src="img/ensaio8.jpg" alt=""></div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <h2>RAFAEL LIMA</h2>
+
+            <p>
+                Capturando momentos únicos e transformando
+                histórias em memórias eternas.
+            </p>
+
         </div>
-    </section>
 
-    <section id="ensaios">
-        <h2 class="section-title">Ensaios Fotográficos</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="img/ensaio1.jpg" alt="Retrato P&B"></div>
-            <div class="gallery-item"><img src="img/ensaio2.jpg" alt="Ensaio no campo"></div>
-            <div class="gallery-item"><img src="img/ensaio3.jpg" alt="Ensaio flores"></div>
-            <div class="gallery-item"><img src="img/ensaio4.jpg" alt="Retrato expressivo"></div>
-            <div class="gallery-item"><img src="img/ensaio6.jpg" alt="Mulher com câmera"></div>
-            <div class="gallery-item"><img src="img/ensaio7.jpg" alt="Ensaio temático amarelo"></div>
-            <div class="gallery-item"><img src="img/ensaio8.jpg" alt="Ensaio de família no campo"></div>
+        <div class="footer-social">
+
+            <a href="https://instagram.com/seuusuario" target="_blank">
+                Instagram
+            </a>
+
+            <a href="https://facebook.com/seuusuario" target="_blank">
+                Facebook
+            </a>
+
+            <a href="https://wa.me/5599999999999" target="_blank">
+                WhatsApp
+            </a>
+
+            <a href="mailto:contato@rafaellima.com">
+                E-mail
+            </a>
+
         </div>
-    </section>
 
-    <script>
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu");
-        const navLinks = document.querySelectorAll(".nav-menu a");
+    </div>
 
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
+    <div class="footer-bottom">
 
-        navLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                hamburger.classList.remove("active");
-                navMenu.classList.remove("active");
-            });
-        });
+        © 2025 Rafael Lima Fotografia • Todos os direitos reservados
 
-        // Transição de Revelação ao Rolar a Página
-        const sections = document.querySelectorAll("section");
-        const revealSections = () => {
-            const triggerBottom = window.innerHeight * 0.85;
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < triggerBottom) {
-                    section.classList.add("visible");
-                }
-            });
-        };
+    </div>
 
-        window.addEventListener("scroll", revealSections);
-        window.addEventListener("DOMContentLoaded", revealSections);
-    </script>
+</footer>
+
+<script>
+
+/* MENU MOBILE */
+
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+
+});
+
+document.querySelectorAll('.nav-menu a').forEach(link => {
+
+    link.addEventListener('click', () => {
+
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+
+    });
+
+});
+
+/* ANIMAÇÃO DAS SEÇÕES */
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('visible');
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+document.querySelectorAll('section').forEach(section => {
+
+    observer.observe(section);
+
+});
+
+</script>
+
 </body>
 </html>
