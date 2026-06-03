@@ -7,6 +7,34 @@
 
 <style>
 
+/* LIGHTBOX */
+#lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+#lightbox-img{
+    max-width:90%;
+    max-height:90vh;
+    border-radius:10px;
+}
+
+#fechar-lightbox{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:50px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* GERAL */
 *{
     margin:0;
     padding:0;
@@ -17,18 +45,15 @@
 body{
     background:#121212;
     color:#fff;
-    min-height:100vh;
 }
 
 /* LOGIN */
-
 #login-screen{
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     min-height:100vh;
-    padding:20px;
 }
 
 .login-box{
@@ -40,113 +65,69 @@ body{
     text-align:center;
 }
 
-.login-box h2{
-    color:#d4af37;
-    margin-bottom:10px;
-}
-
-.login-box p{
-    color:#aaa;
-    margin-bottom:20px;
-}
-
 .login-box input{
     width:100%;
     padding:12px;
+    margin-top:15px;
     border:none;
     border-radius:8px;
     background:#2a2a2a;
-    color:white;
-    margin-bottom:15px;
+    color:#fff;
 }
 
 .login-box button{
     width:100%;
+    margin-top:10px;
     padding:12px;
     border:none;
     border-radius:8px;
     background:#d4af37;
-    color:#000;
     font-weight:bold;
     cursor:pointer;
 }
 
-#error-message{
-    margin-top:10px;
-    color:#ff5b5b;
-    display:none;
-}
-
 /* GALERIA */
-
 #gallery-screen{
     display:none;
     padding:40px 20px;
 }
 
-#gallery-screen h1{
-    text-align:center;
-    color:#d4af37;
-    margin-bottom:10px;
-}
-
-.subtitulo{
-    text-align:center;
-    color:#aaa;
-    margin-bottom:40px;
-}
-
 .grid-galeria{
-    max-width:1400px;
+    max-width:1200px;
     margin:auto;
-
     display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(300px,1fr));
-
-    gap:25px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
 }
 
 .foto-card{
     background:#1e1e1e;
     border-radius:15px;
     overflow:hidden;
-    transition:.3s;
-}
-
-.foto-card:hover{
-    transform:translateY(-5px);
 }
 
 .foto-preview{
     width:100%;
-    height:320px;
+    height:300px;
     object-fit:cover;
-    display:block;
+    cursor:pointer;
 }
 
 .info{
     padding:15px;
 }
 
-.info p{
-    margin-bottom:15px;
-    color:#ccc;
-}
-
 .btn-download{
     display:block;
-    text-align:center;
-    padding:12px;
+    width:100%;
+    padding:10px;
+    margin-top:10px;
     background:#d4af37;
     color:#000;
-    text-decoration:none;
+    border:none;
     border-radius:8px;
-    font-weight:600;
-}
-
-.btn-download:hover{
-    background:#e7c55c;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 </style>
@@ -155,122 +136,29 @@ body{
 <body>
 
 <!-- LOGIN -->
-
 <div id="login-screen">
-
     <div class="login-box">
-
         <h2>Galeria Privada</h2>
 
-        <p>Digite a senha para acessar suas fotos.</p>
+        <input type="password" id="password-input" placeholder="Digite sua senha">
 
-        <input
-            type="password"
-            id="password-input"
-            placeholder="Digite sua senha">
-
-        <button onclick="verificarSenha()">
-            Entrar
-        </button>
-
-        <div id="error-message">
-            Senha incorreta.
-        </div>
-
+        <button onclick="verificarSenha()">Entrar</button>
     </div>
-
 </div>
 
 <!-- GALERIA -->
-
 <div id="gallery-screen">
 
-    <h1>Ensaio Pré-Wedding</h1>
+    <h1 style="text-align:center; color:#d4af37;">Ensaio Pré-Wedding</h1>
 
-    <p class="subtitulo">
-        Rogério & Rafaela
-    </p>
+    <div class="grid-galeria" id="galeria"></div>
 
-    <div class="grid-galeria">
+</div>
 
-        <!-- FOTO 1 -->
-        <div class="foto-card">
-            <a href="img/Ensaio_rogerio_rafa_01.jpg" download>
-                <img src="img/Ensaio_rogerio_rafa_01.jpg" class="foto-preview">
-            </a>
-
-            <div class="info">
-                <p>Ensaio_rogerio_rafa_01.jpg</p>
-
-                <a href="img/Ensaio_rogerio_rafa_01.jpg"
-                   download
-                   class="btn-download">
-
-                   ⬇ Baixar Foto
-
-                </a>
-            </div>
-        </div>
-
-        <!-- FOTO 2 -->
-        <div class="foto-card">
-            <a href="img/Ensaio_rogerio_rafa_02.jpg" download>
-                <img src="img/Ensaio_rogerio_rafa_02.jpg" class="foto-preview">
-            </a>
-
-            <div class="info">
-                <p>Ensaio_rogerio_rafa_02.jpg</p>
-
-                <a href="img/Ensaio_rogerio_rafa_02.jpg"
-                   download
-                   class="btn-download">
-
-                   ⬇ Baixar Foto
-
-                </a>
-            </div>
-        </div>
-
-        <!-- FOTO 3 -->
-        <div class="foto-card">
-            <a href="img/Ensaio_rogerio_rafa_03.jpg" download>
-                <img src="img/Ensaio_rogerio_rafa_03.jpg" class="foto-preview">
-            </a>
-
-            <div class="info">
-                <p>Ensaio_rogerio_rafa_03.jpg</p>
-
-                <a href="img/Ensaio_rogerio_rafa_03.jpg"
-                   download
-                   class="btn-download">
-
-                   ⬇ Baixar Foto
-
-                </a>
-            </div>
-        </div>
-
-        <!-- FOTO 4 -->
-        <div class="foto-card">
-            <a href="img/Ensaio_rogerio_rafa_04.jpg" download>
-                <img src="img/Ensaio_rogerio_rafa_04.jpg" class="foto-preview">
-            </a>
-
-            <div class="info">
-                <p>Ensaio_rogerio_rafa_04.jpg</p>
-
-                <a href="img/Ensaio_rogerio_rafa_04.jpg"
-                   download
-                   class="btn-download">
-
-                   ⬇ Baixar Foto
-
-                </a>
-            </div>
-        </div>
-
-    </div>
-
+<!-- LIGHTBOX -->
+<div id="lightbox">
+    <span id="fechar-lightbox">&times;</span>
+    <img id="lightbox-img">
 </div>
 
 <script>
@@ -278,38 +166,107 @@ body{
 function verificarSenha(){
 
     const senhaCorreta = "marirafa76";
-
-    const senha =
-    document.getElementById("password-input").value;
+    const senha = document.getElementById("password-input").value;
 
     if(senha === senhaCorreta){
-
-        document.getElementById("login-screen")
-        .style.display = "none";
-
-        document.getElementById("gallery-screen")
-        .style.display = "block";
-
-    }else{
-
-        document.getElementById("error-message")
-        .style.display = "block";
-
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("gallery-screen").style.display = "block";
+        carregarGaleria();
     }
 }
 
-document
-.getElementById("password-input")
-.addEventListener("keypress",function(e){
+/* FOTOS */
+const fotos = [
+    "Ensaio_rogerio_rafa_01.jpg",
+    "Ensaio_rogerio_rafa_02.jpg",
+    "Ensaio_rogerio_rafa_03.jpg",
+    "Ensaio_rogerio_rafa_04.jpg"
+];
 
-    if(e.key === "Enter"){
-        verificarSenha();
+function carregarGaleria(){
+
+    const galeria = document.getElementById("galeria");
+
+    fotos.forEach(foto => {
+
+        galeria.innerHTML += `
+            <div class="foto-card">
+
+                <img src="img/${foto}"
+                     class="foto-preview"
+                     data-foto="${foto}">
+
+                <div class="info">
+
+                    <button class="btn-download"
+                        onclick="baixarImagem('${foto}')">
+
+                        ⬇ Baixar Foto
+
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+    });
+
+    ativarLightbox();
+}
+
+/* LIGHTBOX */
+function ativarLightbox(){
+
+    const lightbox = document.getElementById("lightbox");
+    const imgLight = document.getElementById("lightbox-img");
+    const fechar = document.getElementById("fechar-lightbox");
+
+    document.querySelectorAll(".foto-preview").forEach(img => {
+
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            imgLight.src = img.src;
+        });
+
+    });
+
+    fechar.onclick = () => lightbox.style.display = "none";
+
+    lightbox.onclick = (e) => {
+        if(e.target === lightbox){
+            lightbox.style.display = "none";
+        }
+    };
+}
+
+/* DOWNLOAD FORÇADO */
+async function baixarImagem(nomeArquivo){
+
+    try{
+
+        const response = await fetch(`img/${nomeArquivo}`);
+
+        const blob = await response.blob();
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = nomeArquivo;
+
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        window.URL.revokeObjectURL(url);
+
+    }catch(err){
+        alert("A imagem não pode ser baixada no momento ");
+        console.log(err);
     }
-
-});
+}
 
 </script>
 
 </body>
 </html>
-```
