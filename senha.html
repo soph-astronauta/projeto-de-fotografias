@@ -7,21 +7,250 @@
 
 <style>
 
+:root{
+    --bg:#121212;
+    --card:#1e1e1e;
+    --card-hover:#252525;
+    --gold:#d4af37;
+    --white:#ffffff;
+    --text:#d1d1d1;
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--white);
+    min-height:100vh;
+}
+
+/* HEADER */
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    font-size:1.1rem;
+    letter-spacing:4px;
+    font-weight:600;
+    color:var(--gold);
+}
+
+.nav-menu{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    list-style:none;
+}
+
+.nav-menu a{
+    color:var(--white);
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:.85rem;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.nav-menu a:hover{
+    color:var(--gold);
+}
+
+/* HAMBURGER */
+.hamburger{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+.bar{
+    display:block;
+    width:25px;
+    height:3px;
+    margin:5px 0;
+    background:white;
+    border-radius:5px;
+}
+
+/* LOGIN */
+#login-screen{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.login-box h2{
+    margin-bottom:20px;
+    color:var(--gold);
+}
+
+.login-box input{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    background:#2a2a2a;
+    color:white;
+    outline:none;
+    transition:.3s;
+}
+
+.login-box input:focus{
+    border:1px solid var(--gold);
+    box-shadow:0 0 10px rgba(212,175,55,.3);
+}
+
+.login-box button{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:var(--gold);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-box button:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.1);
+}
+
+/* GALERIA */
+#gallery-screen{
+    display:none;
+    padding:120px 20px 50px;
+}
+
+#gallery-screen h1{
+    margin-bottom:10px;
+    text-align:center;
+    color:var(--gold);
+}
+
+#gallery-screen h2{
+    margin-bottom:40px;
+    text-align:center;
+    color:#c4c3c1;
+    font-weight:300;
+}
+
+.grid-galeria{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+/* CARD FOTO */
+.foto-card{
+    background:var(--card);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.35s ease;
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+.foto-card:hover{
+    transform:translateY(-6px);
+    background:var(--card-hover);
+}
+
+.foto-preview{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.foto-card:hover .foto-preview{
+    transform:scale(1.03);
+}
+
+.info{
+    padding:15px;
+}
+
+.btn-download{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:var(--gold);
+    color:black;
+    cursor:pointer;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-download:hover{
+    filter:brightness(1.1);
+    transform:translateY(-2px);
+}
+
 /* LIGHTBOX */
 #lightbox{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.95);
+    background:rgba(0,0,0,.96);
     z-index:9999;
     justify-content:center;
     align-items:center;
+    animation:fadeIn .3s ease;
 }
 
 #lightbox-img{
     max-width:90%;
     max-height:90vh;
-    border-radius:10px;
+    border-radius:12px;
+    box-shadow:0 0 40px rgba(0,0,0,.7);
 }
 
 #fechar-lightbox{
@@ -31,109 +260,90 @@
     font-size:50px;
     color:white;
     cursor:pointer;
-    font-weight:bold;
+    transition:.3s;
 }
 
-/* GERAL */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+#fechar-lightbox:hover{
+    color:var(--gold);
 }
 
-body{
-    background:#121212;
-    color:#fff;
+/* ANIMAÇÕES */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 
-/* LOGIN */
-#login-screen{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
+/* RESPONSIVO */
+@media(max-width:768px){
 
-.login-box{
-    background:#1e1e1e;
-    padding:40px;
-    border-radius:15px;
-    width:100%;
-    max-width:400px;
-    text-align:center;
-}
+    .navbar{
+        padding:15px;
+    }
 
-.login-box input{
-    width:100%;
-    padding:12px;
-    margin-top:15px;
-    border:none;
-    border-radius:8px;
-    background:#2a2a2a;
-    color:#fff;
-}
+    .logo{
+        font-size:.95rem;
+        letter-spacing:2px;
+    }
 
-.login-box button{
-    width:100%;
-    margin-top:10px;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#d4af37;
-    font-weight:bold;
-    cursor:pointer;
-}
+    .nav-menu{
+        gap:15px;
+    }
 
-/* GALERIA */
-#gallery-screen{
-    display:none;
-    padding:40px 20px;
-}
+    .grid-galeria{
+        grid-template-columns:1fr;
+    }
 
-.grid-galeria{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-}
+    .foto-preview{
+        height:260px;
+    }
 
-.foto-card{
-    background:#1e1e1e;
-    border-radius:15px;
-    overflow:hidden;
-}
+    #gallery-screen{
+        padding-top:100px;
+    }
 
-.foto-preview{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-    cursor:pointer;
-}
-
-.info{
-    padding:15px;
-}
-
-.btn-download{
-    display:block;
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    background:#d4af37;
-    color:#000;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
+    .login-box{
+        padding:30px;
+    }
 }
 
 </style>
 </head>
 
 <body>
+    <header>
+        <nav class="navbar">
+    
+            <div class="nav-left">
+    
+                <div class="logo">
+                    RAFAEL LIMA
+                </div>
+    
+                <button class="hamburger" aria-label="Abrir Menu">
+    
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+    
+                </button>
+    
+            </div>
+    
+            <ul class="nav-menu">
+    
+                <li><a href="mais.html">Voltar</a></li>
+        
+        </li>
+    
+            </ul>
+    
+        </nav>
+    </header>
+
 
 <!-- LOGIN -->
 <div id="login-screen">
@@ -150,6 +360,7 @@ body{
 <div id="gallery-screen">
 
     <h1 style="text-align:center; color:#d4af37;">Ensaio Pré-Wedding</h1>
+     <h2 style="text-align:center; color:#c4c3c1;">Mariana e Rafael</h2>
 
     <div class="grid-galeria" id="galeria"></div>
 

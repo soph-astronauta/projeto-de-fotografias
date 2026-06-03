@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael Lima</title>
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        :root {
+            --primary: #1a1a1a;
+            --accent: #d4af37; /* Dourado elegante */
+            --light: #f4f4f4;
+            --text: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            margin: 10px auto 0;
+        }
+
+        /* --- PORTFÓLIO (Placeholder) --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* --- FORMULÁRIO E AGENDAMENTO --- */
+        .booking-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .grid-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-form { grid-template-columns: 1fr; }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* --- RESUMO DE PAGAMENTO --- */
+        .checkout-box {
+            grid-column: 1 / -1;
+            background: #fdfaf2;
+            border: 1px dashed var(--accent);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .price-display {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .btn-submit {
+            grid-column: 1 / -1;
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        .btn-submit:hover {
+            background-color: #bd9a2d;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* --- MODAL DE SUCESSO --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .modal-content h3 { color: #2e7d32; margin-bottom: 10px; }
+        .modal-close {
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>RAFAEL LIMA</h1>
+        <nav>
+            <a href="mais.html">Voltar</a>
+        </nav>
+    </header>
+
+
+        <section id="agendamento">
+            <h2>Reserve sua Sessão</h2>
+            <div class="booking-container">
+                <form id="appointmentForm" class="grid-form">
+                    
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Tipo de Ensaio / Evento</label>
+                        <select id="service" required>
+                            <option value="" disabled selected>Selecione um pacote</option>
+                            <option value="retrato" data-price="450">ENSAIO ESSENCIAL</option>
+                            <option value="casal" data-price="850">ENSAIO LIFESTYLE</option>
+                            <option value="evento" data-price="1600">ENSAIO PREMIUM</option>
+                            <option value="evento" data-price="2500">CASAMENTO ESSENCIAL</option>
+                            <option value="evento" data-price="5500">CASAMENTO LIFESTYLE</option>
+                            <option value="evento" data-price="9500">CASAMENTO PREMIUM</option>
+                            <option value="evento" data-price="950">EVENTO ESSENCIAL</option>
+                            <option value="evento" data-price="2200">EVENTO LIFESTYLE</option>
+                            <option value="evento" data-price="4500">EVENTO PREMIUM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Data Desejada</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <div class="checkout-box">
+                        <div class="price-display" id="priceDisplay">Total: R$ 0,00</div>
+                        
+                        <h4 style="margin-bottom: 10px;">Informações de Pagamento (Simulação)</h4>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <input type="text" id="cardName" placeholder="Nome impresso no cartão" required>
+                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" style="width: 50%;" required>
+                                <input type="text" id="cardCvc" placeholder="CVC" maxlength="4" style="width: 50%;" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Confirmar Agendamento e Pagar</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h3>🎉 Pagamento Aprovado!</h3>
+            <p>Seu agendamento foi realizado com sucesso.</p>
+            <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Um e-mail de confirmação com os detalhes foi enviado.</p>
+            <button class="modal-close" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        const serviceSelect = document.getElementById('service');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const appointmentForm = document.getElementById('appointmentForm');
+        const successModal = document.getElementById('successModal');
+
+        // Atualiza o preço na tela conforme o serviço selecionado
+        serviceSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            
+            if (price) {
+                priceDisplay.textContent = `Total: R$ ${parseFloat(price).toFixed(2).replace('.', ',')}`;
+            } else {
+                priceDisplay.textContent = 'Total: R$ 0,00';
+            }
+        });
+
+        // Configura a data mínima para hoje (evita agendamentos no passado)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+
+        // Envio do formulário (Simulação do Gateway de Pagamento)
+        appointmentForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede a página de recarregar
+
+            // Aqui entraria a chamada de API (Fetch) para o Mercado Pago, Stripe, etc.
+            // Exemplo conceitual:
+            /*
+            fetch('/api/process-payment', {
+                method: 'POST',
+                body: JSON.stringify({ dados do formulario })
+            })
+            */
+
+            // Simulando uma resposta rápida do servidor de pagamento (1.5 segundos)
+            const submitBtn = appointmentForm.querySelector('.btn-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processando pagamento...";
+
+            setTimeout(() => {
+                // Abre o modal de sucesso
+                successModal.style.display = 'flex';
+                
+                // Reseta o formulário
+                appointmentForm.reset();
+                priceDisplay.textContent = 'Total: R$ 0,00';
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Confirmar Agendamento e Pagar";
+            }, 1500);
+        });
+
+        function closeModal() {
+            successModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
